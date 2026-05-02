@@ -9,20 +9,7 @@ class Screen2 extends StatefulWidget {
 
 class _Screen2State extends State<Screen2> {
   @override
-  void initState() {
-    super.initState();
-    print('initState called');
-  }
-
-  @override
-  void deactivate() {
-    super.deactivate();
-    print('deactivate called');
-  }
-
-  @override
   Widget build(BuildContext context) {
-    print('build called');
     return Scaffold(
       backgroundColor: Colors.blue[100],
       appBar: AppBar(
@@ -34,9 +21,7 @@ class _Screen2State extends State<Screen2> {
         children: [
           Center(
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: () {},
               child: Text(
                 'Navigate to Screen 1',
                 style: TextStyle(

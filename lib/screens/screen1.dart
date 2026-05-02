@@ -1,4 +1,3 @@
-import 'package:climaflutter/screens/screen2.dart';
 import 'package:flutter/material.dart';
 
 class Screen1 extends StatelessWidget {
@@ -18,21 +17,14 @@ class Screen1 extends StatelessWidget {
         children: [
           Center(
             child: ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Screen2(),
-                  ),
-                );
-              },
-              child: Text(
-                'Navigate to Screen2',
-                style: TextStyle(fontSize: 22),
-              ),
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.black,
+              ),
+              child: Text(
+                'Navigate to Screen2',
+                style: TextStyle(fontSize: 22),
               ),
             ),
           ),
