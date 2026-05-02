@@ -1,4 +1,7 @@
+import 'package:climaflutter/screens/location_screen.dart';
+import 'package:climaflutter/services/weather.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -7,12 +10,7 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  final LocationSettings locationSettings = LocationSettings(
-    accuracy: LocationAccuracy.low,
-    distanceFilter: 100,
-  );
-
-  void getLocation() async {
+  void getLocationData() async {
     LocationPermission permission = await Geolocator.requestPermission();
 
     if (permission == LocationPermission.denied ||
@@ -20,31 +18,33 @@ class _LoadingScreenState extends State<LoadingScreen> {
       print('Location permission denied.');
       return;
     }
+    //WeatherModel weather = new WeatherModel();
+    var weatherData = await WeatherModel().getLocationWeather();
 
-    Position position = await Geolocator.getCurrentPosition(
-      locationSettings: locationSettings,
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return LocationScreen(
+            locationWeather: weatherData,
+          );
+        },
+      ),
     );
-    print(position);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getLocationData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.zero,
-            ),
-          ),
-          onPressed: () {
-            //Get the current location
-            getLocation();
-          },
-          child: Text('Get Location'),
-        ),
+      body: SpinKitFoldingCube(
+        color: Colors.white,
+        size: 100,
       ),
     );
   }
