@@ -82,12 +82,15 @@ class _LocationScreenState extends State<LocationScreen> {
                             ),
                           );
                           //    print(typedName);
-                          setState(() {
-                            isLoading = true;
-                          });
-                          var weatherData = await WeatherModel()
-                              .getLocationWeatherByCity(typedName);
-                          updateUI(weatherData);
+
+                          if (typedName != null) {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            var weatherData = await WeatherModel()
+                                .getLocationWeatherByCity(typedName);
+                            updateUI(weatherData);
+                          }
                         },
                         child: Icon(Icons.location_city, size: 50.0),
                       ),
